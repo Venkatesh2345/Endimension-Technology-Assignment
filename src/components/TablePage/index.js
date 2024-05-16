@@ -42,22 +42,38 @@ const TablePage = ({ products }) => {
             title: 'Category',
             dataIndex: 'category',
             key: 'category',
+            sorter: (a, b) => a.category.localeCompare(b.category),
+            filters: Array.from(new Set(products.map(product => product.category))).map(category => ({ text: category, value: category })),
+            onFilter: (value, record) => record.category === value,
+            filteredValue: searchText.category ? [searchText.category] : null,
         },
         {
             title: 'Name',
             dataIndex: 'name',
             key: 'name',
+            sorter: (a, b) => a.name.localeCompare(b.name),
+            filters: Array.from(new Set(products.map(product => product.name))).map(name => ({ text: name, value: name })),
+            onFilter: (value, record) => record.name === value,
+            filteredValue: searchText.name ? [searchText.name] : null,
         },
         {
             title: 'Description',
             dataIndex: 'description',
             key: 'description',
+            sorter: (a, b) => a.description.localeCompare(b.description),
+            filters: Array.from(new Set(products.map(product => product.description))).map(description => ({ text: description, value: description })),
+            onFilter: (value, record) => record.description === value,
+            filteredValue: searchText.description ? [searchText.description] : null,
         },
         {
             title: 'Price',
             dataIndex: 'price',
             key: 'price',
             render: (text) => `$${text}`, 
+            sorter: (a, b) => a.price - b.price,
+            filters: Array.from(new Set(products.map(product => product.price))).map(price => ({ text: `$${price}`, value: price })),
+            onFilter: (value, record) => record.price === value,
+            filteredValue: searchText.price ? [searchText.price] : null,
         },
         {
             title: "Actions",
@@ -76,19 +92,18 @@ const TablePage = ({ products }) => {
     return (
         <div className="table-page">
             <div>
-              <Input.Search
-                className="search-bar"
-                placeholder="Search products"
-                allowClear
-                enterButton="Search"
-                onSearch={handleSearch}
-                style={{width:600}}
-            />
-            <Link to="/addproduct">
-                <Button className="add-button" type="primary">Add Product</Button>
-            </Link>
+                <Input.Search
+                    className="search-bar"
+                    placeholder="Search products"
+                    allowClear
+                    enterButton="Search"
+                    onSearch={handleSearch}
+                    style={{width:600}}
+                />
+                <Link to="/addproduct">
+                    <Button className="add-button" type="primary">Add Product</Button>
+                </Link>
             </div>
-          
             <Table
                 className="table-container"
                 columns={columns}
