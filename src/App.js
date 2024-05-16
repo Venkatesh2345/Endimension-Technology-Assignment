@@ -109,19 +109,6 @@ const App=()=> {
       <div className="main-data">
         <div className="heading">
           <h1>Product Management Application</h1>
-
-        </div>
-
-        <div className="filter-box  ">
-          <p>Filter</p>
-          <Input className="input" onChange={onChangeName} placeholder="Name"></Input>
-          <Input className="input" onChange={onChangeDescription} placeholder="Description"></Input>
-          <Select className="input" onChange={onChangeCategory} placeholder="Category" value={selectedCategory}>
-            {category.map((fruit, index) => {
-              return <Select.Option key={index} value={fruit}>{fruit}</Select.Option>
-            })}
-          </Select>
-          <Button onClick={doFilters} type="primary">Search</Button>
         </div>
         <TablePage products={products}/>
       </div>
