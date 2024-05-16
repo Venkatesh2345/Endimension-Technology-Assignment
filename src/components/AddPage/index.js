@@ -1,9 +1,9 @@
 
-//import 'antd/dist/antd.css';
 import './index.css';
-import { Button, Input, Select, Form } from "antd";
+import { Button, Input, Select, Form, notification } from "antd";
 import { useState } from "react"
 import { useArrayContext } from '../../Context';
+import { useNavigate } from 'react-router-dom';
 
 function AddPage() {
   const [name, setName] = useState('');
@@ -13,18 +13,32 @@ function AddPage() {
   const [selectedCategory, setSelectedCategory] = useState()
   const { array, addItem } = useArrayContext();
 
-  const handleSubmit = ()=>{
-    const newItem =  {
+  const [successMessage, setSuccessMessage] = useState('');
+    const navigate = useNavigate();
 
-        category: selectedCategory,
-        name,
-        description,
-        price,
-        key: array.length + 1,
-    }
+    const handleSubmit = () => {
+        const newItem = {
+            category: selectedCategory,
+            name,
+            description,
+            price,
+            key: array.length + 1,
+        };
 
-    console.log(newItem);
-  }
+        addItem(newItem);
+
+        notification.success({
+            message: 'Success',
+            description: 'Product added successfully.',
+        });
+
+        setName('');
+        setDescription('');
+        setPrice('');
+        setSelectedCategory(undefined);
+
+        navigate('/');
+    };
 
 
   const onChangeCategory=(e)=>{
