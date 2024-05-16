@@ -1,0 +1,11 @@
+.input{
+    width:50%;
+  }
+.product-container{
+    display:flex;
+    justify-content: center;
+    align-items:center;
+}
+.heading{
+    text-align:center;
+}
