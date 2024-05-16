@@ -13,23 +13,28 @@ const TablePage = ({ products }) => {
         title: 'Category',
         dataIndex: 'category',
         key: 'category',
+        sorter: (a, b) => a.category.localeCompare(b.category),
     },
     {
         title: 'Name',
         dataIndex: 'name',
         key: 'name',
+        sorter: (a, b) => a.name.localeCompare(b.name),
     },
     {
         title: 'Description',
         dataIndex: 'description',
         key: 'description',
+        sorter: (a, b) => a.description.localeCompare(b.description),
     },
     {
         title: 'Price',
         dataIndex: 'price',
         key: 'price',
-        render: (text) => `$${text}`, // Format price
-    }, {
+        render: (text) => `$${text}`, 
+        sorter: (a, b) => a.price - b.price,
+    },
+    {
         title: "Actions",
         key: "Actions",
         render: (record) => {
@@ -44,7 +49,8 @@ const TablePage = ({ products }) => {
                 </div>
             )
         }
-    },]
+    },
+];
 
 
     const [productData, setProductData] = useState();
@@ -74,7 +80,7 @@ const TablePage = ({ products }) => {
     return (
         <div className="table-page">
             <Link to="/addproduct">
-                <Button className="add-button">Add Product</Button>
+                <Button className="add-button" type="primary">Add Product</Button>
             </Link>
 
             <Table className="table-container"

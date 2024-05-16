@@ -124,8 +124,6 @@ const App=()=> {
           <Button onClick={doFilters} type="primary">Search</Button>
         </div>
         <TablePage products={products}/>
-        {/* <AddPage/> */}
-        
       </div>
     </div>
   )
